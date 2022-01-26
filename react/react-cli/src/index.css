@@ -1,0 +1,19 @@
+.active{
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    line-height: 32px;
+    background: bisque
+}
+.ac{
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    line-height: 32px;
+    background: bisque  
+}
+.waper{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}

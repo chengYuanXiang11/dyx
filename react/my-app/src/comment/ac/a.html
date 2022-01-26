@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+const sourceUrl = "https://www.taobao.com?a=1&b=2&c=3&d#name";
+ 
+function queryParse(url) {
+  /**
+   * 此处写代码逻辑
+   */
+  var obj ={}
+  var b = /[\?|&](\w+)?[=]?(\w+)?/g;
+  url.replace(b, function (v, v1, v2, index, arr) {
+    var key = v2 === undefined ? key = null : v2
+    obj[v1] === undefined ?
+      obj[v1] = key
+      : obj[k1] = [].concat(obj[v1], v2);;
+  });
+  return obj
+}
+console.log(queryParse(sourceUrl))
+    </script>
+</body>
+
+</html>

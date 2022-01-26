@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   .t3d{
+    transform: rotateZ(0);
+    -webkit-transform: rotateZ(0);
+    -moz-transform: rotateZ(0);
+    -ms-transform: rotateZ(0);
+    -o-transform: rotateZ(0);
+    /* //解决闪烁 */
+    -webkit-backface-visibility:hidden;
+    -webkit-perspective:1000;
+}
+.show {
+    font-size: 20px;
+
+            animation: show-item 2s infinite ; 
+}
+
+.hide {
+       
+         animation: hide-item 2s infinite ;
+}
+
+@-webkit-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@-moz-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@-o-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+} 
+
+@-webkit-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@-moz-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@-o-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+    </style>
+</head>
+<body>
+        <div class="show">245325325</div>
+</body>
+</html>

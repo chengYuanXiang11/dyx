@@ -1,0 +1,19 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.layth {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.chatleft {
+    width: 300px;
+}
+
+.chatright {
+    flex: 1;
+}

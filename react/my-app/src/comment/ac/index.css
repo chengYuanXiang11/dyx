@@ -1,0 +1,144 @@
+.t3d{
+    transform: rotateZ(0);
+    -webkit-transform: rotateZ(0);
+    -moz-transform: rotateZ(0);
+    -ms-transform: rotateZ(0);
+    -o-transform: rotateZ(0);
+    /* //解决闪烁 */
+    -webkit-backface-visibility:hidden;
+    -webkit-perspective:1000;
+}
+.show {
+    font-size: 20px;
+    -webkit-animation: show-item 2s reverse backwards;
+       -moz-animation: show-item 2s reverse backwards;
+         -o-animation: show-item 2s reverse backwards;
+            animation: show-item 2s reverse backwards; 
+}
+
+.hide {
+         -moz-animation: hide-item 2s reverse backwards;
+         -o-animation: hide-item 2s reverse backwards;
+         animation: hide-item 2s reverse backwards;
+         -webkit-animation: hide-item 2s reverse backwards;
+}
+
+@-webkit-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@-moz-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@-o-keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+}
+
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 1;
+        color: blue;
+    }
+} 
+
+@-webkit-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@-moz-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@-o-keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 
+
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: green;
+    }
+    100% {
+        opacity: 0;
+        color: blue;
+    }
+} 

@@ -1,0 +1,10 @@
+.haeder{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+img{
+    width: 20px;
+    height: 20px;
+}

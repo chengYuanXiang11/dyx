@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.warper{
+    width: 400px;
+    height: 600px;
+    overflow: scroll;
+}
+.list-cell{
+    height:56px;
+    text-align: center;
+    
+}
+
+.box{
+    height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+
+}

@@ -1,0 +1,127 @@
+.bgcol {
+  background-image: url('../../../public/head_bg.png'), url('../../../public/bg_img04.png');
+  background-size: 100% 0px, 100% 100%;
+  background-repeat: no-repeat, repeat;
+  padding: 0;
+  margin: 0 16px;
+  height: 100%;
+}
+.headerBar {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-flow: column;
+}
+.headerBar .head_attachment {
+  align-self: self-end;
+  display: flex;
+  width: 100%;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+}
+.headerBar .titleH3 {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.bg {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #152e56, #040d1c, #091c3c, #152e56 70%);
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+}
+.warper {
+  flex: 1;
+}
+.card1 {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+.title {
+  color: #fff !important;
+  line-height: 1rem;
+  font-size: 1rem;
+  display: flex;
+  flex-flow: column;
+}
+.headerRight {
+  width: 100px;
+}
+.pagecont_header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+.pagecont_header .decora1 {
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  top: 2%;
+  left: 0;
+}
+.pagecont_header .decora2 {
+  width: 45%;
+  height: 5%;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.pagecont_header .decora3 {
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  top: 2%;
+  right: 0;
+}
+.pagecont_header .decora6 {
+  width: 10%;
+  height: 1%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+.proCardContent {
+  background: transparent;
+  height: 100%;
+  padding: 1%;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+}
+:global .ant-pro-basicLayout-content {
+  overflow: scroll;
+  margin: 0px;
+}
+:global .ant-page-header-heading {
+  justify-content: center;
+}
+:global .ant-page-header-heading-title {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+:global .ant-page-header-heading-left {
+  flex: 1;
+}
+:global .ant-pro-grid-content {
+  flex: 1;
+}
+.memory {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}

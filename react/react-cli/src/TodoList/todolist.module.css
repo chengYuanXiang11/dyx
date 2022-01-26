@@ -1,0 +1,14 @@
+.button{
+    background-color: red;
+    cursor: pointer;
+    display: none;
+}
+.tr{
+    margin: 20px 0;
+}
+.tr:hover{
+    background-color: beige;
+}
+.tr:hover .button{
+    display: inline-block;
+}

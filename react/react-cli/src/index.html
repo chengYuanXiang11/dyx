@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="chat">
+        <ul id="chatList">
+        </ul>
+        <form>
+            <input type="text" name="chatContent" id="chatContent" />
+            <input type="button" id="sendChatContent" value="发送" />
+        </form>
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js">
+    </script>
+    <script script src="../node_modules/socket.io/client-dist/socket.io.js">
+    </script>
+    <!-- <script src="http://localhost:8081/socket.io/socket.io.js"></script> -->
+    <script>
+        // $('#sendChatContent').click(function(){
+        //     $.get('http://localhost:8081/addgroup',{name:'群组'},'json')
+        // })
+
+
+        // 默认情况下，任何在 Socket 未连接时发出的事件都会被缓冲，直到重新连接。
+        // 虽然在大多数情况下很有用（当重新连接延迟很短时），但它可能会在连接恢复时导致大量事件。
+        //1.重连清空缓存区
+        // socket.on("connect", () => {
+        //     socket.sendBuffer = [];
+        // });
+        // 2.socket.volatile（未连接时不会分发事件）
+        // socket.volatile.emit("ping", ++count)
+
+
+        const socket = io('ws://localhost:3000/group', {
+            // { transports : [ "websocket" ] },//禁用长轮询
+            rememberUpgrade: true, //如果为 true 并且先前与服务器的 WebSocket 连接成功，则连接尝试将绕过正常的升级过程并最初尝试 WebSocket。传输错误后的连接尝试将使用正常的升级过程。建议您仅在使用 SSL/TLS 连接时打开此选项，或者您知道您的网络不会阻止 websockets。
+            // path:"/",//与服务端匹配的路径
+            // query:'42',//附加参数，在socket.handshake.query服务器端的对象中找到，query在会话期间无法更新，query在客户端更改仅当当前会话关闭并创建新会话时才有效：
+            //  {      query保留参数(默认)
+            //         EIO：协议的版本（目前为“4”）
+            //     transport：传输名称（“轮询”或“websocket”）
+            //     sid: 会话 ID
+            //     j：如果传输正在轮询但需要 JSONP 响应
+            //     t：用于缓存破坏的哈希时间戳}
+            extraHeaders: {
+                "my-custom-header": "1234"
+            }, //其他调皮，在socket.handshake.headers服务器端的对象中找到 
+            withCredentials: true, //是否应使用 cookie、授权标头或 TLS 客户端证书等凭据进行跨站点请求。设置withCredentials对同站请求没有影响
+            // forceBase64:true,//是否强制对通过 WebSocket 发送的二进制内容进行 base64 编码（始终为 HTTP 长轮询启用）
+            // timestampRequests:false,//是否为每个请求添加时间戳查询参数（用于缓存破坏）。
+            // timestampParam  :"t",//用作时间戳键的查询参数的名称。 
+            // reconnection: false, //是否重新连接
+            reconnectionAttempts: 5, //重连次数
+            reconnectionDelay: 2000, //重连延迟
+            reconnectionDelayMax: 5000, //重连最大延迟，每次尝试都会将重新连接延迟增加 2 倍。
+            randomizationFactor: 0.5, //随机因子           ,
+            // {第一次重新连接尝试发生在 500 到 1500 毫秒之间 ( 1000 * 2^0 * (<something between -0.5 and 1.5>))
+            //     第二次重新连接尝试发生在 1000 到 3000 毫秒之间 ( 1000 * 2^1 * (<something between -0.5 and 1.5>))
+            //     第三次重新连接尝试发生在 2000 到 5000 毫秒之间 ( 1000 * 2^2 * (<something between -0.5 and 1.5>))
+            //     下一次重新连接尝试发生在 5000 毫秒之后}
+            timeout: 50000, //连接超时限制
+            // autoConnect: false,//创建时自动连接
+            // auth: { //访问凭证等（socket.handshake.auth）
+            //     token: "abcd"
+            // }
+        });
+
+        socket.on('connect', () => {
+                // 不应在connect处理程序本身中注册事件处理程序，因为每次 Socket 重新连接时都会注册一个新的处理程序
+                // console.log(socket.id)每个新连接都分配有一个随机的 20 个字符的标识符，此标识符与服务器端的值同步 。
+                console.log(socket.connected); // true 是否已经连接到服务器
+                socket.emit('hi', 'client');
+            }
+
+        );
+        socket.on('news', data => {
+            console.log(data)
+        })
+        socket.on('someevent', data => {
+            console.log(data)
+        })
+        socket.on("connect_error", () => {
+            console.log('err')
+            //无法连接或者连接被中断时触发
+            socket.auth.token = "abcd";
+            socket.connect();
+        });
+        socket.on("disconnect", (reason) => {
+            console.log('断开连接')
+            console.log(reason)
+
+        });
+
+        //重连函数
+        // const tryReconnect = () => {
+        //     setTimeout(() => {
+        //         socket.io.open((err) => {
+        //             if (err) {
+        //                 tryReconnect();
+        //             }
+        //         });
+        //     }, 2000);
+        // }
+        // socket.io.on("close", tryReconnect);
+    </script>
+    <!-- <script>
+        var socket = io.connect('ws://localhost:8081')
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', {
+                my: 'data'
+            });
+        });
+    </script> -->
+    <!-- <script>
+        // 建立 socket 连接
+        var ws = new WebSocket('ws://localhost:8080');
+        // 点击“发送”，向服务器发送聊天信息
+        $('#sendChatContent').click(function (ev) {
+            var username = $('#username').text();
+            var chatContent = $('#chatContent').val().trim();
+                    ws.send(JSON.stringify({
+                        username: username,
+                        chatContent: chatContent
+                    }) );
+            $('#chatContent').val('');
+
+        });
+        ws.onmessage = function (evt) {
+            var data =null
+            if(evt.data === '服务器发送数据'){
+                data = evt.data
+                $('#chatList').append(`<li>${data}</li>`);
+
+            }else{
+                data = JSON.parse(evt.data)
+            $('#chatList').append('<li><span class="chatusername">' +data.chatContent + '</span>：<span class="chatcontent">' + data.chatConten + '</span></li>');
+
+            }
+
+        };
+    </script> -->
+</body>
+
+</html>

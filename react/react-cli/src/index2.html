@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="chat">
+        <ul id="chatList">
+        </ul>
+        <form>
+            <input type="text" name="chatContent" id="chatContent" />
+            <input type="button" id="sendChatContent" value="发送" />
+        </form>
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <!-- <script src="../node_modules/socket.io/client-dist/socket.io.js"></script> -->
+    <script src="http://localhost:8081/socket.io/socket.io.js"></script>
+    <script>
+        // $('#sendChatContent').click(function(){
+        //     $.get('http://localhost:8081/addgroup',{name:'群组'},'json')
+        // })
+        const socket = io('http://localhost:8081/group2');
+
+        $('sendChatContent').click(function () {
+            socket.on('connect', function () {
+                socket.emit('hi!');
+            });
+            socket.on('userList',data=>{
+                console.log(data)
+            })
+        })
+    </script>
+    <!-- <script>
+        var socket = io.connect('ws://localhost:8081')
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', {
+                my: 'data'
+            });
+        });
+    </script> -->
+    <!-- <script>
+        // 建立 socket 连接
+        var ws = new WebSocket('ws://localhost:8080');
+        // 点击“发送”，向服务器发送聊天信息
+        $('#sendChatContent').click(function (ev) {
+            var username = $('#username').text();
+            var chatContent = $('#chatContent').val().trim();
+                    ws.send(JSON.stringify({
+                        username: username,
+                        chatContent: chatContent
+                    }) );
+            $('#chatContent').val('');
+
+        });
+        ws.onmessage = function (evt) {
+            var data =null
+            if(evt.data === '服务器发送数据'){
+                data = evt.data
+                $('#chatList').append(`<li>${data}</li>`);
+
+            }else{
+                data = JSON.parse(evt.data)
+            $('#chatList').append('<li><span class="chatusername">' +data.chatContent + '</span>：<span class="chatcontent">' + data.chatConten + '</span></li>');
+
+            }
+
+        };
+    </script> -->
+</body>
+
+</html>

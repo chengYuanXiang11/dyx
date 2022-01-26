@@ -1,0 +1,8 @@
+/* Umi 中约定 src/global.css 为全局样式，如果存在此文件，会被自动引入到入口文件最前面。
+
+比如用于覆盖样式，
+
+.ant-select-selection {
+  max-height: 51px;
+  overflow: auto;
+} */
