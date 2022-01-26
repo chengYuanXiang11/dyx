@@ -1,0 +1,28 @@
+{
+    "name": "Minimal PWA",
+    "short_name": "PWA Demo",
+    "description": "The app that helps you understand PWA", 
+    "display": "standalone",
+    "start_url": "/", 
+    "theme_color": "#313131", 
+    "background_color": "#313131", 
+    "icons": [ 
+      {
+      "src": "icon/lowres.webp",
+      "sizes": "48x48", 
+      "type": "image/webp"  
+    },
+    {
+      "src": "icon/lowres",
+      "sizes": "48x48"
+    },
+    {
+      "src": "icon/hd_hi.ico",
+      "sizes": "72x72 96x96 128x128 256x256"
+    },
+    {
+      "src": "icon/hd_hi.svg",
+      "sizes": "72x72"
+    }
+    ]
+  }

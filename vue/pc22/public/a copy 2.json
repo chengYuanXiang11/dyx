@@ -1,0 +1,169 @@
+[
+    {
+      "type": "select",
+      "field": "paymentType",
+      "title": "付款类型 :",
+      "info": "",
+      "hidden": false,
+      "display": true,
+      "props": {
+        "loading": false
+      },
+      "validate": [
+        {
+          "trigger": "change",
+          "message": "请选择",
+          "required": true
+        }
+      ],
+      "options": [],
+      "effect": {
+        "selectData": "payment"
+      },
+      "conditions": true,
+      "emitPrefix": "paymentType",
+      "emit": [
+        "visible-change",
+        "input"
+      ]
+    },
+    {
+      "type": "input",
+      "field": "paymentReason",
+      "title": "付款事由 :",
+      "info": "",
+      "props": {
+        "type": "textarea",
+        "readonly": false,
+        "placeholder": "请输入内容"
+      },
+      "_fc_drag_tag": "input",
+      "hidden": false,
+      "display": true,
+      "value": "",
+      "validate": [
+        {
+          "type": "string",
+          "trigger": "change",
+          "mode": "required",
+          "message": "请输入付款事由",
+          "required": true
+        }
+      ]
+    },
+    {
+      "type": "input",
+      "field": "paymentMoney",
+      "title": "付款金额(元) :",
+      "info": "",
+      "props": {
+        "maxlength": 15,
+        "minlength": 0
+      },
+      "hidden": false,
+      "display": true,
+      "validate": [
+        {
+          "trigger": "change",
+          "message": "请输入调整金额",
+          "required": true
+        }
+      ],
+      "conditions": true,
+      "emit": [
+        "change"
+      ]
+    },
+    {
+      "type": "datePicker",
+      "field": "paymentTime",
+      "title": "期望付款日期 :",
+      "info": "",
+      "props": {
+        "type": "datetime",
+        "prefixIcon": "el-icon-date",
+        "placeholder": "请选择时间"
+      },
+      "_fc_drag_tag": "datePicker",
+      "hidden": false,
+      "display": true,
+      "value": null,
+      "validate": [
+        {
+          "type": "string",
+          "trigger": "change",
+          "mode": "required",
+          "message": "请选择补卡时间",
+          "required": true
+        }
+      ],
+      "suffix": {
+        "type": "el-link",
+        "props": {
+          "underline": false
+        },
+        "children": [
+          ""
+        ]
+      },
+      "emit": [
+        "change"
+      ]
+    },
+    {
+      "type": "input",
+      "field": "paymentPayee",
+      "title": "收款人(单位)  :",
+      "info": "",
+      "props": {},
+      "hidden": false,
+      "display": true,
+      "validate": [
+        {
+          "trigger": "change",
+          "message": "请输入收款人",
+          "required": true
+        }
+      ],
+      "emit": [
+        "change"
+      ]
+    },
+    {
+      "type": "input",
+      "field": "paymentAccount",
+      "title": "银行账户 :",
+      "info": "",
+      "props": {},
+      "hidden": false,
+      "display": true,
+      "validate": [
+        {
+          "trigger": "change",
+          "message": "请输入银行账户",
+          "required": true
+        },
+        {
+          "type": "string",
+          "trigger": "change",
+          "mode": "pattern",
+          "message": "122",
+          "pattern": "^(?:[1-9]{1})(?:\\d{15}|\\d{18})$"
+        }
+      ],
+      "emit": [
+        "change"
+      ]
+    },
+    {
+      "type": "Execl",
+      "field": "paymentFile",
+      "title": " ",
+      "info": "",
+      "props": {
+        "limit": 3
+      },
+      "hidden": false,
+      "display": true
+    }
+  ]

@@ -1,0 +1,19 @@
+{
+  "name": "cyx-cli-model",
+  "version": "0.0.1",
+  "description": "",
+  "bin": {
+    "cyx": "./index.mjs"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0",
+    "inquirer": "^8.2.0"
+  }
+}

@@ -1,0 +1,172 @@
+<template>
+    <Table-page
+        :page-size="search.pageSize"
+        :total="search.total"
+        :page-num="search.pageNum"
+        :searchForm="search.form"
+        label-widht="70px"
+        @pagination="handlePagination"
+        @search="handleSearch"
+        :showLimit="3"
+    >
+        <template slot="action-bar">
+            <el-radio-group v-model="radio1" @change="radioChange">
+                <el-radio-button label="1">按商位</el-radio-button>
+                <el-radio-button label="2">按商户</el-radio-button>
+            </el-radio-group>
+        </template>
+
+        <el-table v-loading="loading" :data="tableData" border height="100%">
+            <el-table-column key="1" label="商位号" prop="shop" v-if="radio1 == 1" />
+            <el-table-column key="2" label="水表编码" prop="code" v-if="radio1 == 1" />
+            <el-table-column key="3" label="水表状态" prop="state" v-if="radio1 == 1" />
+            <el-table-column key="4" label="商户名称" prop="merchant_name" v-if="radio1 == 1" />
+            <el-table-column key="6" label="商户姓名" prop="merchant_username" v-if="radio1 == 1" />
+
+            <el-table-column key="7" label="商户名称" prop="merchant_name" v-if="radio1 == 2">
+                <template slot-scope="scope">{{ scope.row.merchant.storeName }}</template>
+            </el-table-column>
+            <el-table-column key="5" label="经营品种" prop="mobile" v-if="radio1 == 2">
+                <template
+                    slot-scope="scope"
+                >{{ saleCategoryFilter(scope.row.merchant.saleCategory) }}</template>
+            </el-table-column>
+            <el-table-column key="8" label="商户姓名" prop="merchant_username" v-if="radio1 == 2">
+                <template slot-scope="scope">{{ scope.row.merchant.merchantName }}</template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+                <template slot-scope="scope">
+                    <el-button
+                        size="mini"
+                        type="text"
+                        @click="listTo(scope.row.id, 'quotient')"
+                        v-if="radio1 == 1"
+                    >查看</el-button>
+                    <el-button
+                        size="mini"
+                        type="text"
+                        @click="listTo(scope.row.locationId, 'merchant')"
+                        v-if="radio1 == 2"
+                    >查看</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </Table-page>
+</template>
+
+<script>
+import {
+    getList,
+    getListTwo
+} from "@/request/api/lot/waterpower/waterRecords";
+export default {
+    data() {
+        return {
+            // 查询参数
+            queryParams: {},
+            search: {
+                pageNum: 1,
+                pageSize: 10,
+                total: 0,
+                form: [
+                ],
+            },
+            radio1: "1",
+            // 高级
+            isShow: false,
+            showDrawer: false,
+            drawerType: "",
+            loading: false,
+            btnLoading: false,
+            total: 0,
+            tableData: [{ id: 1, mobile: 666 }],
+            query: {
+                pageNum: 1,
+                pageSize: 20,
+            },
+            form: {},
+            rules: {},
+            saleCategoryList: []
+
+        };
+    },
+    created() {
+        this.getList(this.radio1);
+
+        this.getDicts("businessCategory").then((response) => {
+            this.saleCategoryList = response.data;
+        });
+    },
+    methods: {
+        saleCategoryFilter(value) {
+            let _this = this
+            if (value) {
+                let arr = value.map(e => {
+                    let aa = _this.saleCategoryList.find(item => {
+                        return item.id == e
+                    })
+                    return aa.label
+                });
+                return arr.join(',')
+            }
+        },
+        // 分页方法
+        handlePagination(e) {
+            this.search.pageSize = e.pageSize;
+            this.search.pageNum = e.pageNum;
+            this.getList();
+        },
+        // 搜索方法
+        handleSearch(e) {
+            this.queryParams = e;
+            this.search.pageNum = 1;
+            this.getList();
+        },
+        radioChange(val) {
+            this.getList(val)
+        },
+        // 按申请-查看
+        listTo(id, type) {
+            this.$router.push({
+                path: `/waterPage/${type}`,
+                query: {
+                    id,
+                    type
+                }
+            })
+        },
+        getList(val) {
+            let _this = this
+            this.loading = true;
+            if (val == 1) {
+                getList(this.queryFormat(this.queryParams, this.search))
+                    .then((response) => {
+                        _this.tableData = response.data.results;
+                        _this.search.total = response.data.count;
+                    })
+                    .finally((error) => {
+                        _this.loading = false;
+                    });
+            } else {
+                getListTwo(this.queryFormat(this.queryParams, this.search))
+                    .then((response) => {
+                        _this.tableData = response.data.results;
+                        _this.search.total = response.data.count;
+                    })
+                    .finally((error) => {
+                        _this.loading = false;
+                    });
+            }
+
+        },
+
+    },
+};
+</script>
+
+<style scoped lang="scss">
+.yg-table {
+    margin-top: 20px;
+}
+</style>
+

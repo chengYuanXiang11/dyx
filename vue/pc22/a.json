@@ -1,0 +1,24 @@
+[
+    {
+        "type": "select",
+        "field": "06z5strq900t",
+        "title": "选择器",
+        "info": "",
+        "effect": {
+            "fetch": {
+                "to": "options",
+                "parse": "[[FORM-CREATE-PREFIX-function (res){\n   return res.data;\n}-FORM-CREATE-SUFFIX]]",
+                "        action": "http://mrppcapiuat.yugu8.com/pc/system/list/subclassInfo/?listCode=usingLaborType",
+                "        method": "GET",
+                "          data": {},
+                "        _parse": "function (res){\n   return res.data;\n}"
+            }
+        },
+        "props": {
+            "   _optionType": 1
+        },
+        "  _fc_drag_tag": "select",
+        "        hidden": false,
+        "       display": true
+    }
+]

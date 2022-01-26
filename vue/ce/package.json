@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "qrcode.vue": "^3.3.3",
+    "qrcodejs2": "^0.0.2",
+    "qs": "^6.10.2",
+    "vue-router": "^3.5.3"
+  }
+}
