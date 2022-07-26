@@ -1,68 +1,19 @@
-name: Node.js CI
+name: vue/cli # 显示名字
 
 on:
   push:
-    branches: [main]
+    branches: [main] # main分支push就执行该工作流
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 在最新的ubuntu机器上
 
     steps:
       - uses: actions/checkout@v3 # git 克隆到当前机器上
       - name: Use Node.js
-        uses: actions/setup-node@v3 # 设置node环境
+        uses: actions/setup-node@v3
         with:
-          node-version: 16.x # 指定版本
+          node-version: 16.x # 使用16的node版本
           cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn # 运行 yarn
-
-      - name: Run build
-        run: yarn build # 运行 yarn build
-
-      - name: View directory files
-        run: ls -a # 查看打包后的目录文件
-
-      - name: Rename build folder
-        run: mv .next build # 重命名.next成build
-      - uses: appleboy/scp-action@master # 使用scp-action进行文件上传
-        with:
-          host: 1.15.110.27 # 服务器host
-          username: root # 服务器用户名
-          password: chengYuanXiang@qq.com151 # 服务器密码
-          source: 'build,package.json,public' # 需要上传的文件
-          target: '~/demo' # 上传到服务器的什么位置
-
-      - name: Run Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          command_timeout: 4m
-          host: 1.15.110.27 # 服务器host
-          username: root # 服务器用户名
-          password: chengYuanXiang@qq.com151 # 服务器密码
-          script: | # 运行多行命令
-            echo "[deploy] start deployment..."
-            # 进到当前文件夹
-            cd ~/demo
-
-            # 停止服务
-            pm2 stop demo
-            pm2 delete demo
-
-            # 删除之前的文件
-            rm -rf .next
-            rm -rf node_modules
-
-            # 将上传的文件的文件进行重命名 build -> .next
-            mv build .next
-
-            # 安装依赖
-            yarn --prod
-
-            # 启动服务
-            yarn pm2
-
-            echo "[deploy] end deployment..."
-            echo "[deploy] success"
+      - run: yarn global add @vue/cli # 全局安装@vue/cli
+      - run: vue -V # 查看版本
