@@ -15,5 +15,5 @@ jobs:
         with:
           node-version: 16.x # 使用16的node版本
           cache: 'yarn'
-      - run: yarn global add @vue/cli # 全局安装@vue/cli
-      - run: vue -V # 查看版本
+      # - run: yarn global add @vue/cli # 全局安装@vue/cli
+      - run: yarn -v # 查看版本
