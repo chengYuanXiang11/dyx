@@ -18,8 +18,8 @@ jobs:
       run: npm -v
     # - name: Run build task
     #   run: npm run build:dev
-    # - name: Deploy to Server
-    #   uses: easingthemes/ssh-deploy@v2.1.5
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v2.1.5
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-rltgoDzvO --delete'
