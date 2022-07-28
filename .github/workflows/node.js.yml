@@ -9,6 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ../
+          key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
+          restore-keys: |
+            runner.os build- env.cache-name -
+            runner.os build
+            runner.os 
     - uses: actions/checkout@v3
     - name: Install Node.js
       uses: actions/setup-node@v3
@@ -20,17 +29,7 @@ jobs:
       run: yarn
     - name: Run build task
       run: yarn run build
-    - name: Cache Gradle packages
-      uses: actions/cache@v3
-      with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
-          restore-keys: |
-            runner.os build- env.cache-name -
-            runner.os build
-            runner.os 
+
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
