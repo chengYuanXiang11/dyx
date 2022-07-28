@@ -20,13 +20,24 @@ jobs:
       run: yarn
     - name: Run build task
       run: yarn run build
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
+          restore-keys: |
+            runner.os build- env.cache-name -
+            runner.os build
+            runner.os 
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-rltgoDzvO --delete'
-          SOURCE: build # 这是要复制到阿里云静态服务器的文件夹名称
-        #   SOURCE: ${{ secrets.SOURCE }} # 这是要复制到阿里云静态服务器的文件夹名称
-          REMOTE_HOST: ${{ secrets.YOU_HOST }} # 你的阿里云公网地址
-          REMOTE_USER: ${{ secrets.REMOTE_USER }} # 阿里云登录后默认为 root 用户，并且所在文件夹为 root
+          SOURCE: build # 这是要复制到云静态服务器的文件夹名称
+        #   SOURCE: ${{ secrets.SOURCE }} # 这是要复制到云静态服务器的文件夹名称
+          REMOTE_HOST: ${{ secrets.YOU_HOST }} # 你的阿公网地址
+          REMOTE_USER: ${{ secrets.REMOTE_USER }} # 登录后默认为 root 用户，并且所在文件夹为 root
           TARGET: ${{ secrets.OUTPUTPATH }} # 打包后的 dist 文件夹将放在 /root/node-server
