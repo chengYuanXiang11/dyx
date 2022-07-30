@@ -148,7 +148,7 @@
           "trigger": "change",
           "mode": "pattern",
           "message": "122",
-          "pattern": "^(?:[1-9]{1})(?:\\d{15}|\\d{6})$"
+          "pattern": "^(?:[1-9]{1})(?:\\d{15}|\\d{18})$"
         }
       ],
       "emit": [

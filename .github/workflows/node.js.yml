@@ -1,4 +1,4 @@
-name: Build app and deploy to aliyun
+name: Build app and deploy to tengxunyun
 on:
   #监听push操作
   push:
@@ -12,13 +12,14 @@ jobs:
     - name: Cache Gradle packages
       uses: actions/cache@v3
       with:
-        path: ../
+        path: ~/.gradle/caches
         key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
     - uses: actions/checkout@v3
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16.13.1'
+            cache: 'yarn'
     - name: yarn vetsion
       run: yarn -v
     - name: Install yarn dependencies

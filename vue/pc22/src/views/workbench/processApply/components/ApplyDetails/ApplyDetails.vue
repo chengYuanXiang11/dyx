@@ -184,7 +184,6 @@ export default {
                             .filter((v) => {
                                 return v !== undefined;
                             });
-                        console.log(this.config);
                     }
                 );
             },
