@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.13.1'
-            cache: 'yarn'
+        cache: 'yarn'
     - name: yarn vetsion
       run: yarn -v
     - name: Install yarn dependencies
