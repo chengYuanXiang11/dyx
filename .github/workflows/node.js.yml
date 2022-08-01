@@ -17,6 +17,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: location
       run:  pwd
+    - name: wenj
+      run:  ls
+    - name: wenj2
+      run:  cd ../
+    - name: wenj3
+      run:  ls
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
