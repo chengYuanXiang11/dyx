@@ -13,8 +13,9 @@ jobs:
       run: mkdir node_modules
     - name: Cache Gradle packages
       uses: actions/cache@v3
-      with:
-        path: ./node_modules
+        id: node_modules_cache
+        with:
+          path: node_modules
         key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
     - uses: actions/checkout@v3
     - name: location
@@ -33,7 +34,8 @@ jobs:
     - name: yarn vetsion
       run: yarn -v
     - name: Install yarn dependencies
-      run: yarn
+     - run: yarn
+        if: steps.node_modules_cache.outputs.cache-hit != 'true' # skip this step if cacher restored
     - name: Run build task
       run: yarn run build
 
