@@ -33,8 +33,7 @@ jobs:
     - name: yarn vetsion
       run: yarn -v
     - name: Install yarn dependencies
-     - run: yarn
-        if: steps.node_modules_cache.outputs.cache-hit != 'true' # skip this step if cacher restored
+      run: yarn
     - name: Run build task
       run: yarn run build
 
