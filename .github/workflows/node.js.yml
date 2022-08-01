@@ -13,7 +13,6 @@ jobs:
       run: mkdir node_modules
     - name: Cache Gradle packages
       uses: actions/cache@v3
-      id: node_modules_cache
       with:
         path: node_modules
         key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
