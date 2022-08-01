@@ -9,10 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: location
+      run: mkdir node_modules
     - name: Cache Gradle packages
       uses: actions/cache@v3
       with:
-        path: **/node_modules
+        path: ./node_modules
         key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
     - uses: actions/checkout@v3
     - name: location
