@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: location
+    - name: location2
       run: mkdir node_modules
     - name: Cache Gradle packages
       uses: actions/cache@v3
