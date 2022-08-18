@@ -11,11 +11,11 @@ jobs:
     steps:
     - name: location2
       run: mkdir node_modules
-    - name: Cache Gradle packages
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
+    # - name: Cache Gradle packages
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: node_modules
+    #     key: runner.os -build-env.cache-name- hashFiles('**/package-lock.json')
     - uses: actions/checkout@v3
     - name: location
       run:  pwd
@@ -44,6 +44,6 @@ jobs:
           ARGS: '-rltgoDzvO --delete'
           SOURCE: build # 这是要复制到云静态服务器的文件夹名称
         #   SOURCE: ${{ secrets.SOURCE }} # 这是要复制到云静态服务器的文件夹名称
-          REMOTE_HOST: ${{ secrets.YOU_HOST }} # 你的阿公网地址
+          REMOTE_HOST: ${{ secrets.YOU_HOST }} # 你的公网地址
           REMOTE_USER: ${{ secrets.REMOTE_USER }} # 登录后默认为 root 用户，并且所在文件夹为 root
           TARGET: ${{ secrets.OUTPUTPATH }} # 打包后的 dist 文件夹将放在 /root/node-server
